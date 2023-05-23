@@ -1,28 +1,20 @@
-FROM node:18-alpine as builder
-
-ENV NODE_ENV=development
-USER node
-
-COPY --chown=node:node . /app
-WORKDIR /app
-
-RUN yarn install && yarn build
-
-#############################################
-
-FROM node:18-alpine
-
-ENV NODE_ENV=production
-
-RUN mkdir /app && chown node:node /app
-
-USER node
-
-COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/package.json /app/package.json
-COPY --from=builder /app/yarn.lock /app/yarn.lock
+# Build stage
+FROM node:18-alpine3.14 as builder
 
 WORKDIR /app
+
+COPY . .
+
+RUN yarn install --frozen-lockfile && yarn build
+
+# Production stage
+FROM node:18-alpine3.14
+
+WORKDIR /app
+
+COPY --from=builder --chown=node:node /app/dist ./dist
+COPY --from=builder --chown=node:node /app/package.json ./
+COPY --from=builder --chown=node:node /app/yarn.lock ./
 
 RUN yarn install --production --frozen-lockfile && yarn cache clean
 
