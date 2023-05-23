@@ -7,13 +7,12 @@ App-Food is a powerful application providing APIs for managing food ordering ope
 ### Prerequisites
 
 To run this project, you will need:
-- Node.js and Yarn installed on your machine.
-- Docker (optional, if you want to build and run the app using Docker).
-- MongoDB (set up a local instance or use a cloud-based service like MongoDB Atlas).
+- Docker and Docker Compose installed on your machine.
+- Optionally, Node.js and Yarn if you want to run the app outside Docker.
 
 ### Environment Variables
 
-The application requires a MongoDB instance. The address of your MongoDB instance should be specified through the environment variable `MONGODB_HOST`.
+The application requires a MongoDB instance, but if you use Docker Compose, this is handled for you. If you are not using Docker Compose, the address of your MongoDB instance should be specified through the environment variable `MONGODB_HOST`.
 
 You can create a `.env` file in the root of the project with the following variable:
 
@@ -23,7 +22,17 @@ MONGODB_HOST=Your_MongoDB_Host
 
 ## Setup and Running
 
-### With Node.js and TypeScript
+### Recommended: With Docker Compose
+
+Build and start the application using Docker Compose:
+
+```bash
+docker-compose up -d
+```
+
+This is the recommended way of running App-Food as it will also set up a MongoDB instance for you, all tied together in a neat Docker package.
+
+### Alternatively: With Node.js and TypeScript
 
 First, install the project dependencies:
 
@@ -43,7 +52,7 @@ Start the application:
 yarn start:dev
 ```
 
-### With Docker
+### Alternatively: With Docker
 
 Build the Docker image:
 
@@ -55,14 +64,6 @@ Run the Docker container:
 
 ```bash
 docker run -d -p 3000:3000 app-food
-```
-
-### With Docker Compose
-
-Build and start the application using Docker Compose:
-
-```bash
-docker-compose up -d
 ```
 
 ## API Endpoints
