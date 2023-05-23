@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 import { router } from './router';
 
-mongoose.connect('mongodb://localhost:27017')
+mongoose.connect('mongodb://mongo:27017')
 	.then(() => {
 		const app = express();
 		const port = 3000;
