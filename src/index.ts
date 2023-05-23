@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 
 import { router } from './router';
 
-mongoose.connect('mongodb://mongo:27017')
-	.then(() => {
+mongoose.connect(`mongodb://${process.env.MONGO_HOST ?? 'localhost'}:27017`)
+  .then(() => {
 		const app = express();
 		const port = 3000;
 
