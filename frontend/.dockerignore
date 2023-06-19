@@ -1,0 +1,10 @@
+*
+!package.json
+!yarn.lock
+!src/
+!public/
+!babel.config.js
+!webpack.config.js
+!tsconfig.json
+!nginx.conf
+!.env
