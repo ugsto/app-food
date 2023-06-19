@@ -1,6 +1,8 @@
 import React from 'react';
 import {ThemeSwitch} from './layout/theme-switch';
 import {ContextProvider} from './hooks/context/context-provider';
+import {CategoryPage} from './pages/categories';
+import {ProductsPage} from './pages/products';
 
 export function App() {
 	return (
@@ -8,7 +10,9 @@ export function App() {
 			<header>
 				<ThemeSwitch />
 			</header>
-			<main></main>
+			<main>
+				<ProductsPage />
+			</main>
 			<footer></footer>
 		</ContextProvider>
 	);

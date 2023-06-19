@@ -8,7 +8,7 @@ import {Button} from '@/components/button';
 import {FormInput} from '@/components/form-input';
 import {CategoryName} from './components/name';
 import {CategoryIcon} from './components/icon';
-import { Row } from '@/components/row';
+import {Row} from '@/components/row';
 
 const Container = styled('div', {
 	backgroundColor: '$background',
