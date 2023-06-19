@@ -145,7 +145,6 @@ curl -X POST -H 'Content-Type: application/json' \
   "table": "Table 4",
   "products": [
     {"product": "your_first_category_id", "quantity": 2},
-    {"product": "your_second_category_id", "quantity": 1}
   ]
 }' \
 localhost:3000/orders
