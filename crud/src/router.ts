@@ -1,53 +1,52 @@
 import path from 'node:path';
-import { Router } from 'express';
+import {Router} from 'express';
 import multer from 'multer';
-import { listCategories } from './app/useCases/categories/listCategories';
-import { createCategory } from './app/useCases/categories/createCategory';
-import { listProducts } from './app/useCases/products/listProducts';
-import { createProduct } from './app/useCases/products/createProduct';
-import { listProductsByCategory } from './app/useCases/categories/listProductsByCategory';
-import { listOrders } from './app/useCases/orders/listOrders';
-import { createOrder } from './app/useCases/orders/createOrder';
-import { changeOrderStatus } from './app/useCases/orders/changeOrderStatus';
-import { cancelOrder } from './app/useCases/orders/cancelOrder';
+import {listCategories} from './app/useCases/categories/listCategories';
+import {createCategory} from './app/useCases/categories/createCategory';
+import {listProducts} from './app/useCases/products/listProducts';
+import {createProduct} from './app/useCases/products/createProduct';
+import {listProductsByCategory} from './app/useCases/categories/listProductsByCategory';
+import {listOrders} from './app/useCases/orders/listOrders';
+import {createOrder} from './app/useCases/orders/createOrder';
+import {changeOrderStatus} from './app/useCases/orders/changeOrderStatus';
+import {cancelOrder} from './app/useCases/orders/cancelOrder';
 export const router = Router();
 
-//configuração do multer
+// Configuração do multer
 const upload = multer({
-	storage: multer.diskStorage({
-		destination(req, file, callback){
-			callback(null, path.resolve(__dirname, '..', 'uploads'));
-		},
-		filename(req, file, callback){
-			callback(null, `${Date.now()}-${file.originalname}`);
-		},
-	})
-
+  storage: multer.diskStorage({
+    destination(request, file, callback) {
+      callback(null, path.resolve(__dirname, '..', 'uploads'));
+    },
+    filename(request, file, callback) {
+      callback(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
 });
 
-//List categories
+// List categories
 router.get('/categories', listCategories);
 
-//Create category
+// Create category
 router.post('/categories', createCategory);
 
-//List products
+// List products
 router.get('/products', listProducts);
 
-//Create products
+// Create products
 router.post('/products', upload.single('image'), createProduct);
 
-//Get products by category
+// Get products by category
 router.get('/categories/:categoryId/products', listProductsByCategory);
 
-//List orders
+// List orders
 router.get('/orders', listOrders);
 
-//Create orders
+// Create orders
 router.post('/orders', createOrder);
 
-//Change orders status/ patch e nao put por ser uma alteração parcial
+// Change orders status/ patch e nao put por ser uma alteração parcial
 router.patch('/orders/:orderId', changeOrderStatus);
 
-//Delete/cancel order
+// Delete/cancel order
 router.delete('/orders/:orderId', cancelOrder);
