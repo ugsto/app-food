@@ -76,8 +76,8 @@ export function ProductsPage() {
 			setNewProduct({
 				...newProduct,
 				image: {
-					filename: event.target.files[0].name,
-					data: event.target.files[0],
+					filename: event.target.files[0]!.name,
+					data: event.target.files[0]!,
 				},
 			});
 		}
